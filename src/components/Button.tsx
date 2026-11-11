@@ -32,8 +32,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 
 const SIZE_CLASSES: Record<ButtonSize, Record<ButtonVariant, string>> = {
   sm: {
-    primary: 'px-5 py-2 text-[14px] font-medium',
-    outline: 'px-5 py-2 text-[14px] font-medium',
+    primary: 'px-4.5 py-2 text-[13px] font-medium',
+    outline: 'px-4.5 py-2 text-[13px] font-medium',
   },
   md: {
     primary: 'h-11.5 w-38.25 text-[16px] font-medium',
@@ -41,9 +41,9 @@ const SIZE_CLASSES: Record<ButtonSize, Record<ButtonVariant, string>> = {
   },
   lg: {
     primary:
-      'h-11.5 px-7 text-[15px] font-medium leading-6 sm:h-14 sm:w-49.5 sm:px-0 sm:text-[19.48px]',
+      'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-49.5 sm:px-0 sm:text-[19.48px] sm:leading-6',
     outline:
-      'h-11.5 px-7 text-[15px] font-medium leading-6 sm:h-14 sm:w-45.75 sm:px-0 sm:text-[19.48px]',
+      'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-45.75 sm:px-0 sm:text-[19.48px] sm:leading-6',
   },
 };
 

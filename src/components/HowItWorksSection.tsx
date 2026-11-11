@@ -52,7 +52,7 @@ export function HowItWorksSection() {
           titleClassName="max-w-151.25"
         />
 
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-7">
+        <div className="mt-8 grid grid-cols-1 gap-7 sm:mt-14 sm:grid-cols-2 sm:gap-8 lg:mt-24 lg:grid-cols-4 lg:gap-7">
           {STEPS.map((step, idx) => {
             const isActive = activeStep === step.number;
             return (
@@ -69,7 +69,7 @@ export function HowItWorksSection() {
                 whileHover={{ y: -4 }}
                 onMouseEnter={() => setActiveStep(step.number)}
                 onClick={() => setActiveStep(step.number)}
-                className="group relative cursor-default pt-6.5 pb-4"
+                className="group relative cursor-default pt-5 pb-2 sm:pt-6.5 sm:pb-4"
               >
                 {/* Animated top border bar */}
                 <motion.span
@@ -97,11 +97,11 @@ export function HowItWorksSection() {
                   {step.number}
                 </p>
 
-                <div className="mt-7.25">
+                <div className="mt-4 sm:mt-7.25">
                   <h3 className="type-card-title text-[20px] sm:text-[22px] lg:text-[24px]">
                     {step.title}
                   </h3>
-                  <p className="mt-2.75 text-[15px] font-normal leading-normal text-ink-body sm:text-[16px]">
+                  <p className="mt-2 text-[14.5px] font-normal leading-normal text-ink-body sm:mt-2.75 sm:text-[16px]">
                     {step.description}
                   </p>
                 </div>

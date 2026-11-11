@@ -26,20 +26,20 @@ export function Navbar() {
     <header className="relative z-30 bg-surface">
       <Container className="relative">
         {/* Top contact utility strip */}
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 text-[11px] text-ink sm:justify-end sm:gap-x-6 sm:text-[13px] lg:h-9 lg:gap-x-7 lg:py-0 lg:text-[16px]">
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 pt-2 pb-1 text-[9.5px] text-ink min-[400px]:gap-x-3 min-[400px]:text-[10.5px] sm:justify-end sm:gap-x-6 sm:py-2 sm:text-[13px] lg:h-9 lg:gap-x-7 lg:py-0 lg:text-[16px]">
           <a
             href="https://wa.me/442080593982"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-75"
+            className="inline-flex items-center gap-1 whitespace-nowrap transition-opacity hover:opacity-75 sm:gap-1.5"
           >
-            <WhatsAppIcon className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
+            <WhatsAppIcon className="h-3 w-3 shrink-0 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
             <span>020 8059 3982</span>
           </a>
 
           <a
             href="tel:02080593982"
-            className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-75"
+            className="inline-flex items-center gap-1 whitespace-nowrap transition-opacity hover:opacity-75 sm:gap-1.5"
           >
             <PhoneIcon className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5 lg:h-4 lg:w-4" />
             <span>020 8059 3982</span>
@@ -47,7 +47,7 @@ export function Navbar() {
 
           <a
             href="mailto:help@cleaning-circle.co.uk"
-            className="inline-flex items-center gap-1 transition-opacity hover:opacity-75"
+            className="inline-flex items-center gap-1 whitespace-nowrap transition-opacity hover:opacity-75"
           >
             <EmailIcon className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5 lg:h-4 lg:w-4" />
             <span>help@cleaning-circle.co.uk</span>
@@ -55,7 +55,7 @@ export function Navbar() {
         </div>
 
         {/* Main navigation bar */}
-        <div className="flex h-17 items-center justify-between lg:h-21">
+        <div className="flex h-16 items-center justify-between lg:h-21">
           <motion.a
             href="#home"
             onClick={() => setActiveHref('#home')}
@@ -65,8 +65,7 @@ export function Navbar() {
             className="inline-flex items-center lg:absolute lg:left-12 lg:top-2.25 xl:left-16"
             aria-label="Cleaning Circle Home"
           >
-            <BrandLogo size="sm" className="lg:hidden" />
-            <BrandLogo size="lg" className="hidden lg:inline-flex" />
+            <BrandLogo size="responsive" />
           </motion.a>
 
           {/* Desktop navigation */}

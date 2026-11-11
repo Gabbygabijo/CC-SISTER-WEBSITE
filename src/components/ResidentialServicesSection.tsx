@@ -138,7 +138,7 @@ export function ResidentialServicesSection() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={VIEWPORT_ONCE}
               transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
-              className="relative -mt-[28%] ml-auto w-[72%] sm:-mt-[25%] sm:w-[66%] xl:absolute xl:left-51 xl:top-59.5 xl:mt-0 xl:w-89.5"
+              className="relative mt-[-28%] ml-auto w-[72%] sm:mt-[-25%] sm:w-[66%] xl:absolute xl:left-51 xl:top-59.5 xl:mt-0 xl:w-89.5"
             >
               <motion.img
                 src={ResidentialBathroom}

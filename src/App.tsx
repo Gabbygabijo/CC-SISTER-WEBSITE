@@ -1,7 +1,9 @@
 import { MotionConfig } from 'motion/react';
 import { HeroSection } from './components/HeroSection';
+import { HowItWorksSection } from './components/HowItWorksSection';
 import { Navbar } from './components/Navbar';
 import { ResidentialServicesSection } from './components/ResidentialServicesSection';
+import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 
 export function App() {
   return (
@@ -11,6 +13,8 @@ export function App() {
         <main>
           <HeroSection />
           <ResidentialServicesSection />
+          <WhyChooseUsSection />
+          <HowItWorksSection />
         </main>
       </div>
     </MotionConfig>

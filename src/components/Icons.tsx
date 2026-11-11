@@ -132,3 +132,92 @@ export function CloseIcon({ className = 'w-6 h-6', ...props }: SVGProps<SVGSVGEl
   );
 }
 
+export function UserBadgeCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="10" cy="8" r="3.5" />
+      <path d="M4 19.5c0-3.2 2.7-5.5 6-5.5 1.3 0 2.5.35 3.5 1" />
+      <path d="m15.5 18.5 2 2 4-4.5" />
+    </svg>
+  );
+}
+
+export function ShieldCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 3 4.5 6.2v5.4c0 4.6 3.2 8.7 7.5 9.9 4.3-1.2 7.5-5.3 7.5-9.9V6.2L12 3Z" />
+      <path d="m8.8 12.2 2.2 2.2 4.3-4.4" />
+    </svg>
+  );
+}
+
+export function CalendarCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M8 3v4M16 3v4M3.5 9.5h17" />
+      <path d="m9 14.8 2 2 4.2-4.2" />
+    </svg>
+  );
+}
+
+export function CustomerHeartIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 20.5s-7.5-4.7-7.5-10.3A4.4 4.4 0 0 1 8.9 5.8c1.3 0 2.4.6 3.1 1.6.7-1 1.8-1.6 3.1-1.6a4.4 4.4 0 0 1 4.4 4.4c0 5.6-7.5 10.3-7.5 10.3Z" />
+    </svg>
+  );
+}
+

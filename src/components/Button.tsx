@@ -1,4 +1,6 @@
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'motion/react';
+import type { ReactNode } from 'react';
+import { SPRING_SNAPPY } from '../lib/motion';
 
 type ButtonVariant = 'primary' | 'outline';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -12,16 +14,16 @@ interface BaseProps {
 
 type AnchorButtonProps = BaseProps & {
   href: string;
-} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className' | 'children' | 'href'>;
+} & Omit<HTMLMotionProps<'a'>, 'className' | 'children' | 'href'>;
 
 type NativeButtonProps = BaseProps & {
   href?: never;
-} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>;
+} & Omit<HTMLMotionProps<'button'>, 'className' | 'children'>;
 
 export type ActionButtonProps = AnchorButtonProps | NativeButtonProps;
 
 const BASE_CLASSES =
-  'group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full transition-colors';
+  'group relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full transition-colors';
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: 'bg-brand text-white',
@@ -49,7 +51,11 @@ function isAnchorProps(props: ActionButtonProps): props is AnchorButtonProps {
   return typeof props.href === 'string';
 }
 
-function getCombinedClassName(variant: ButtonVariant, size: ButtonSize, className: string) {
+function getCombinedClassName(
+  variant: ButtonVariant,
+  size: ButtonSize,
+  className: string,
+) {
   return `${BASE_CLASSES} ${VARIANT_CLASSES[variant]} ${SIZE_CLASSES[size][variant]} ${className}`;
 }
 
@@ -85,13 +91,16 @@ export function ActionButton(props: ActionButtonProps) {
     } = props;
 
     return (
-      <a
+      <motion.a
         href={href}
+        whileHover={{ y: -1.5 }}
+        whileTap={{ scale: 0.97, y: 0 }}
+        transition={SPRING_SNAPPY}
         className={getCombinedClassName(variant, size, className)}
         {...anchorProps}
       >
         <ActionButtonContent variant={variant}>{children}</ActionButtonContent>
-      </a>
+      </motion.a>
     );
   }
 
@@ -105,12 +114,15 @@ export function ActionButton(props: ActionButtonProps) {
   } = props;
 
   return (
-    <button
+    <motion.button
       type={type}
+      whileHover={{ y: -1.5 }}
+      whileTap={{ scale: 0.97, y: 0 }}
+      transition={SPRING_SNAPPY}
       className={getCombinedClassName(variant, size, className)}
       {...buttonProps}
     >
       <ActionButtonContent variant={variant}>{children}</ActionButtonContent>
-    </button>
+    </motion.button>
   );
 }

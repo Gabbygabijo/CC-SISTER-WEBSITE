@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useState } from 'react';
 import { ResidentialBathroom, ResidentialLivingArea } from '../assets/images';
+import { EASE_OUT, SPRING_GENTLE, VIEWPORT_ONCE } from '../lib/motion';
 import { Container } from './Container';
 import { HighlightsCard, type HighlightItem } from './HighlightsCard';
 import { SectionHeader } from './SectionHeader';
@@ -70,6 +72,15 @@ export function ResidentialServicesSection() {
     'regular-home-cleaning': true,
   });
 
+  const collageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: collageRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const livingRoomDrift = useTransform(scrollYProgress, [0, 1], [8, -8]);
+  const bathroomDrift = useTransform(scrollYProgress, [0, 1], [18, -14]);
+
   const toggleService = (id: string) => {
     setExpandedIds((prev) => ({
       ...prev,
@@ -100,21 +111,53 @@ export function ResidentialServicesSection() {
         {/* Photo Collage + Interactive Services Accordion */}
         <div className="mt-8 flex flex-col gap-10 sm:mt-10 lg:mt-10.5 lg:flex-row lg:items-center lg:gap-12 xl:gap-14.75">
           {/* Overlapping Residential Collage */}
-          <div className="relative w-full max-w-140.5 shrink-0 lg:w-115 xl:h-151 xl:w-155.5 xl:max-w-155.5">
-            <img
-              src={ResidentialLivingArea}
-              alt="Spotless modern living room sofa and marble coffee table"
-              className="aspect-425/405 w-[74%] rounded-xl object-cover sm:w-[70%] xl:h-101.25 xl:w-106.25 xl:rounded-2xl"
-            />
-            <img
-              src={ResidentialBathroom}
-              alt="Sparkling clean modern bathroom with freestanding tub"
-              className="relative mt-[-28%] ml-auto aspect-358/260 w-[72%] rounded-[14px] border-[6px] border-collage-stroke object-cover sm:mt-[-25%] sm:aspect-358/310 sm:w-[66%] xl:absolute xl:left-51 xl:top-59.5 xl:mt-0 xl:aspect-auto xl:h-91.25 xl:w-89.5 xl:rounded-2xl xl:border-[9px]"
-            />
+          <div
+            ref={collageRef}
+            className="relative w-full max-w-140.5 shrink-0 lg:w-115 xl:h-151 xl:w-155.5 xl:max-w-155.5"
+          >
+            <motion.div
+              style={{ y: livingRoomDrift }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 0.55, ease: EASE_OUT }}
+              className="w-[74%] sm:w-[70%] xl:w-106.25"
+            >
+              <motion.img
+                src={ResidentialLivingArea}
+                alt="Spotless modern living room sofa and marble coffee table"
+                whileHover={{ scale: 1.02 }}
+                transition={SPRING_GENTLE}
+                className="aspect-425/405 w-full rounded-xl object-cover xl:h-101.25 xl:rounded-2xl"
+              />
+            </motion.div>
+
+            <motion.div
+              style={{ y: bathroomDrift }}
+              initial={{ opacity: 0, y: 32, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={VIEWPORT_ONCE}
+              transition={{ duration: 0.6, delay: 0.12, ease: EASE_OUT }}
+              className="relative -mt-[28%] ml-auto w-[72%] sm:-mt-[25%] sm:w-[66%] xl:absolute xl:left-51 xl:top-59.5 xl:mt-0 xl:w-89.5"
+            >
+              <motion.img
+                src={ResidentialBathroom}
+                alt="Sparkling clean modern bathroom with freestanding tub"
+                whileHover={{ y: -5, scale: 1.02 }}
+                transition={SPRING_GENTLE}
+                className="aspect-358/260 w-full rounded-[14px] border-[6px] border-collage-stroke object-cover sm:aspect-358/310 xl:aspect-auto xl:h-91.25 xl:rounded-2xl xl:border-[9px]"
+              />
+            </motion.div>
           </div>
 
           {/* Services Accordion */}
-          <div className="w-full lg:flex-1 xl:max-w-138.75">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_ONCE}
+            transition={{ duration: 0.55, delay: 0.08, ease: EASE_OUT }}
+            className="w-full lg:flex-1 xl:max-w-138.75"
+          >
             {RESIDENTIAL_SERVICES.map((service, index) => (
               <ServiceAccordionItem
                 key={service.id}
@@ -124,7 +167,7 @@ export function ResidentialServicesSection() {
                 showDivider={index < RESIDENTIAL_SERVICES.length - 1}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

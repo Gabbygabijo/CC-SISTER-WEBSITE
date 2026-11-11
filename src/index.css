@@ -1,111 +1,218 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import "tailwindcss";
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@theme {
+  /* -------------------------------------------------------------------------
+     Brand & Surface Color Palette (Cleaning Circle)
+     ------------------------------------------------------------------------- */
+  --color-brand: #b9c32e;
+  --color-brand-mark: #bbc62e;
+  --color-brand-hover: #7f8726;
+  --color-brand-tint: rgba(185, 195, 46, 0.1);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-surface: #ffffff;
+  --color-surface-services: rgba(243, 245, 219, 0.76);
+  --color-surface-tint: rgba(241, 243, 213, 0.76);
+  --color-surface-areas: #f1f3d5;
+  --color-surface-faq: #e8ebb9;
+  --color-collage-stroke: #f3f5db;
 
-  @media (max-width: 1024px) {
+  /* Text & Ink Colors */
+  --color-ink: #000000;
+  --color-ink-strong: #2a2828;
+  --color-ink-body: #3a3a3a;
+  --color-ink-muted: rgba(58, 58, 58, 0.75);
+  --color-ink-subtle: rgba(58, 58, 58, 0.5);
+
+  /* Border & Divider Colors */
+  --color-line: #d2d2d2;
+  --color-line-soft: rgba(210, 210, 210, 0.6);
+
+  /* -------------------------------------------------------------------------
+     Font Families
+     ------------------------------------------------------------------------- */
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-step: "Kedebideri", "Inter", system-ui, sans-serif;
+  --font-logo: "Arial Rounded MT Bold", "Nunito", ui-rounded,
+    "SF Pro Rounded", sans-serif;
+
+  /* -------------------------------------------------------------------------
+     Typography Scale (from Figma Text Styles)
+     ------------------------------------------------------------------------- */
+  --text-display: 3rem; /* 48px - Hero H1 */
+  --text-display--line-height: 1.15;
+
+  --text-heading: 2.25rem; /* 36px - Section H2 */
+  --text-heading--line-height: 2.75rem; /* 44px */
+
+  --text-step-num: 2rem; /* 32px - How It Works 01-04 */
+  --text-step-num--line-height: 1.2;
+
+  --text-subheading: 1.5rem; /* 24px - Card / Accordion H3 */
+  --text-subheading--line-height: 1.25;
+
+  --text-lead: 1.25rem; /* 20px - Hero lead, Contact details, Footer titles */
+  --text-lead--line-height: 1.45;
+
+  --text-btn-lg: 1.2175rem; /* ~19.48px - Hero CTA buttons */
+  --text-btn-lg--line-height: 1.5rem; /* 24px */
+
+  --text-base: 1rem; /* 16px - Body, Nav, Eyebrow, Quote */
+  --text-base--line-height: 1.5rem; /* 24px */
+
+  --text-small: 0.875rem; /* 14px - Inputs, Highlight copy, Footer links */
+  --text-small--line-height: 1.43;
+
+  /* -------------------------------------------------------------------------
+     Shadows & Radii
+     ------------------------------------------------------------------------- */
+  --shadow-highlights: -6px -2px 17.5px 0px rgba(0, 0, 0, 0.15);
+  --shadow-testimonial: 0px 2px 4px 0px rgba(0, 0, 0, 0.13);
+  --shadow-control: 0px 4px 4px 0px rgba(0, 0, 0, 0.11);
+  --shadow-logo-inset: inset 0px 1.7px 42.33px 0px rgba(0, 0, 0, 0.25);
+
+  --radius-card-sm: 8px;
+  --radius-card: 16px;
+  --radius-card-md: 18px;
+  --radius-card-lg: 22px;
+  --radius-highlights: 33px;
+  --radius-testimonial: 36px;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
     font-size: 16px;
+    color: var(--color-ink-body);
+    background-color: var(--color-surface);
+    scroll-behavior: smooth;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--color-surface);
+    color: var(--color-ink-body);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+
+  p {
+    margin: 0;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+@layer components {
+  /* Figma Typography Presets */
+  .type-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--color-brand);
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .type-hero-label {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--color-ink);
   }
-}
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  .type-hero-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-display);
+    font-weight: 700;
+    line-height: var(--text-display--line-height);
+    color: var(--color-brand);
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  .type-section-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-heading);
+    font-weight: 600;
+    line-height: var(--text-heading--line-height);
+    color: var(--color-ink);
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  .type-card-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-subheading);
+    font-weight: 500;
+    line-height: var(--text-subheading--line-height);
+    color: var(--color-ink);
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  .type-step-number {
+    font-family: var(--font-step);
+    font-size: var(--text-step-num);
+    font-weight: 500;
+    line-height: var(--text-step-num--line-height);
+    color: var(--color-ink);
+  }
+
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: var(--text-lead);
+    font-weight: 400;
+    line-height: var(--text-lead--line-height);
+    color: var(--color-ink-body);
+  }
+
+  .type-body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--text-base--line-height);
+    color: var(--color-ink-body);
+  }
+
+  .type-quote {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--color-ink-muted);
+  }
+
+  .type-action {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 600;
+    line-height: 1.49;
+    color: var(--color-brand);
+  }
+
+  .type-small {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 400;
+    line-height: var(--text-small--line-height);
+    color: var(--color-ink-body);
+  }
+
+  .type-footer-heading {
+    font-family: var(--font-sans);
+    font-size: var(--text-lead);
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--color-ink);
+  }
 }

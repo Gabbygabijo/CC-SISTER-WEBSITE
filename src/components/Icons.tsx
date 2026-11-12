@@ -221,3 +221,129 @@ export function CustomerHeartIcon({
   );
 }
 
+export function TrustpilotWordmark({
+  className = 'h-7 w-auto',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 124 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="Trustpilot"
+      {...props}
+    >
+      <path
+        d="M14.5 2 17.8 11.4H27.7L19.7 17.2L22.7 26.6L14.5 20.9L6.3 26.6L9.3 17.2L1.3 11.4H11.2L14.5 2Z"
+        fill="#00B67A"
+      />
+      <path d="M20.2 19.3L19.7 17.2L14.5 20.9L20.2 19.3Z" fill="#005128" />
+      <text
+        x="32"
+        y="22.5"
+        fill="#191919"
+        fontFamily="Inter, system-ui, sans-serif"
+        fontSize="18.5"
+        fontWeight="700"
+        letterSpacing="-0.02em"
+      >
+        Trustpilot
+      </text>
+    </svg>
+  );
+}
+
+export function TrustpilotStars({
+  className = 'h-6 w-auto',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  const boxes = [0, 34, 68, 102, 136];
+
+  return (
+    <svg
+      viewBox="0 0 166 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      role="img"
+      aria-label="5 out of 5 stars on Trustpilot"
+      {...props}
+    >
+      {boxes.map((x) => (
+        <g key={x} transform={`translate(${x}, 0)`}>
+          <rect width="30" height="30" rx="1.5" fill="#00B67A" />
+          <path
+            d="M15 5.4L17.4 12.2H24.6L18.8 16.4L21 23.2L15 19.1L9 23.2L11.2 16.4L5.4 12.2H12.6L15 5.4Z"
+            fill="#FFFFFF"
+          />
+          <path d="M19.1 17.9L18.8 16.4L15 19.1L19.1 17.9Z" fill="#00B67A" opacity="0.2" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function ChevronLeftIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m14.5 6-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function ChevronRightIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m9.5 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+export function PlusIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.9}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+

@@ -347,3 +347,130 @@ export function PlusIcon({
   );
 }
 
+export function LocationPinIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 21s6.5-5.8 6.5-11.2A6.5 6.5 0 0 0 5.5 9.8C5.5 15.2 12 21 12 21Z" />
+      <circle cx="12" cy="9.8" r="2.3" />
+    </svg>
+  );
+}
+
+export function GooglePlusIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M8.7 11v2.2h3.6c-.2 1.4-1.5 2.9-3.6 2.9a3.9 3.9 0 0 1 0-7.8c1.1 0 1.9.4 2.5 1l1.7-1.6A6.2 6.2 0 0 0 8.7 6a6.1 6.1 0 1 0 0 12.2c3.5 0 5.9-2.5 5.9-6 0-.4 0-.8-.1-1.2H8.7Zm10.8 0V8.8h-1.7V11h-2.2v1.7h2.2v2.2h1.7v-2.2h2.2V11h-2.2Z" />
+    </svg>
+  );
+}
+
+export function InstagramIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+      <circle cx="12" cy="12" r="3.8" />
+      <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function FacebookIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M14.5 4.5h2.2V2h-2.5c-2.6 0-4.2 1.6-4.2 4.3V9H7.5v3h2.5v9.5h3.2V12h2.8l.5-3h-3.3V6.5c0-1.2.5-2 1.3-2Z" />
+    </svg>
+  );
+}
+
+export function CopyrightIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M14.5 9.6a3.5 3.5 0 1 0 0 4.8" />
+    </svg>
+  );
+}
+
+export function CheckCircleIcon({
+  className = 'w-6 h-6',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8.8 12.2 2.2 2.2 4.3-4.4" />
+    </svg>
+  );
+}
+

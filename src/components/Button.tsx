@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { SPRING_SNAPPY } from '../lib/motion';
 
 type ButtonVariant = 'primary' | 'outline';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize = 'sm' | 'md' | 'lg' | 'full';
 
 interface BaseProps {
   variant?: ButtonVariant;
@@ -44,6 +44,10 @@ const SIZE_CLASSES: Record<ButtonSize, Record<ButtonVariant, string>> = {
       'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-49.5 sm:px-0 sm:text-[19.48px] sm:leading-6',
     outline:
       'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-45.75 sm:px-0 sm:text-[19.48px] sm:leading-6',
+  },
+  full: {
+    primary: 'h-12.5 w-full px-6 text-[17px] font-medium leading-6 sm:h-14 sm:text-[20px]',
+    outline: 'h-12.5 w-full px-6 text-[17px] font-medium leading-6 sm:h-14 sm:text-[20px]',
   },
 };
 

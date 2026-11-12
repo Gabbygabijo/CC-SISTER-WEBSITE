@@ -1,5 +1,8 @@
 import { MotionConfig } from 'motion/react';
+import { AreasWeCoverSection } from './components/AreasWeCoverSection';
 import { FaqSection } from './components/FaqSection';
+import { Footer } from './components/Footer';
+import { GetQuoteSection } from './components/GetQuoteSection';
 import { HeroSection } from './components/HeroSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { Navbar } from './components/Navbar';
@@ -19,7 +22,10 @@ export function App() {
           <HowItWorksSection />
           <TestimonialsSection />
           <FaqSection />
+          <GetQuoteSection />
+          <AreasWeCoverSection />
         </main>
+        <Footer />
       </div>
     </MotionConfig>
   );

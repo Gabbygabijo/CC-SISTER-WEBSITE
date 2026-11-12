@@ -1,7 +1,9 @@
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'motion/react';
+import type { ReactNode } from 'react';
+import { SPRING_SNAPPY } from '../lib/motion';
 
 type ButtonVariant = 'primary' | 'outline';
-type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonSize = 'sm' | 'md' | 'lg' | 'full';
 
 interface BaseProps {
   variant?: ButtonVariant;
@@ -12,16 +14,16 @@ interface BaseProps {
 
 type AnchorButtonProps = BaseProps & {
   href: string;
-} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className' | 'children' | 'href'>;
+} & Omit<HTMLMotionProps<'a'>, 'className' | 'children' | 'href'>;
 
 type NativeButtonProps = BaseProps & {
   href?: never;
-} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>;
+} & Omit<HTMLMotionProps<'button'>, 'className' | 'children'>;
 
 export type ActionButtonProps = AnchorButtonProps | NativeButtonProps;
 
 const BASE_CLASSES =
-  'group relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full transition-colors';
+  'group relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full transition-colors';
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: 'bg-brand text-white',
@@ -30,8 +32,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 
 const SIZE_CLASSES: Record<ButtonSize, Record<ButtonVariant, string>> = {
   sm: {
-    primary: 'px-5 py-2 text-[14px] font-medium',
-    outline: 'px-5 py-2 text-[14px] font-medium',
+    primary: 'px-4.5 py-2 text-[13px] font-medium',
+    outline: 'px-4.5 py-2 text-[13px] font-medium',
   },
   md: {
     primary: 'h-11.5 w-38.25 text-[16px] font-medium',
@@ -39,9 +41,13 @@ const SIZE_CLASSES: Record<ButtonSize, Record<ButtonVariant, string>> = {
   },
   lg: {
     primary:
-      'h-11.5 px-7 text-[15px] font-medium leading-6 sm:h-14 sm:w-49.5 sm:px-0 sm:text-[19.48px]',
+      'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-49.5 sm:px-0 sm:text-[19.48px] sm:leading-6',
     outline:
-      'h-11.5 px-7 text-[15px] font-medium leading-6 sm:h-14 sm:w-45.75 sm:px-0 sm:text-[19.48px]',
+      'h-10 px-5 text-[13.5px] font-medium leading-5 sm:h-14 sm:w-45.75 sm:px-0 sm:text-[19.48px] sm:leading-6',
+  },
+  full: {
+    primary: 'h-12.5 w-full px-6 text-[17px] font-medium leading-6 sm:h-14 sm:text-[20px]',
+    outline: 'h-12.5 w-full px-6 text-[17px] font-medium leading-6 sm:h-14 sm:text-[20px]',
   },
 };
 
@@ -49,7 +55,11 @@ function isAnchorProps(props: ActionButtonProps): props is AnchorButtonProps {
   return typeof props.href === 'string';
 }
 
-function getCombinedClassName(variant: ButtonVariant, size: ButtonSize, className: string) {
+function getCombinedClassName(
+  variant: ButtonVariant,
+  size: ButtonSize,
+  className: string,
+) {
   return `${BASE_CLASSES} ${VARIANT_CLASSES[variant]} ${SIZE_CLASSES[size][variant]} ${className}`;
 }
 
@@ -85,13 +95,16 @@ export function ActionButton(props: ActionButtonProps) {
     } = props;
 
     return (
-      <a
+      <motion.a
         href={href}
+        whileHover={{ y: -1.5 }}
+        whileTap={{ scale: 0.97, y: 0 }}
+        transition={SPRING_SNAPPY}
         className={getCombinedClassName(variant, size, className)}
         {...anchorProps}
       >
         <ActionButtonContent variant={variant}>{children}</ActionButtonContent>
-      </a>
+      </motion.a>
     );
   }
 
@@ -105,12 +118,15 @@ export function ActionButton(props: ActionButtonProps) {
   } = props;
 
   return (
-    <button
+    <motion.button
       type={type}
+      whileHover={{ y: -1.5 }}
+      whileTap={{ scale: 0.97, y: 0 }}
+      transition={SPRING_SNAPPY}
       className={getCombinedClassName(variant, size, className)}
       {...buttonProps}
     >
       <ActionButtonContent variant={variant}>{children}</ActionButtonContent>
-    </button>
+    </motion.button>
   );
 }

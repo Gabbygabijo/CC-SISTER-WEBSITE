@@ -132,3 +132,345 @@ export function CloseIcon({ className = 'w-6 h-6', ...props }: SVGProps<SVGSVGEl
   );
 }
 
+export function UserBadgeCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="10" cy="8" r="3.5" />
+      <path d="M4 19.5c0-3.2 2.7-5.5 6-5.5 1.3 0 2.5.35 3.5 1" />
+      <path d="m15.5 18.5 2 2 4-4.5" />
+    </svg>
+  );
+}
+
+export function ShieldCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 3 4.5 6.2v5.4c0 4.6 3.2 8.7 7.5 9.9 4.3-1.2 7.5-5.3 7.5-9.9V6.2L12 3Z" />
+      <path d="m8.8 12.2 2.2 2.2 4.3-4.4" />
+    </svg>
+  );
+}
+
+export function CalendarCheckIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M8 3v4M16 3v4M3.5 9.5h17" />
+      <path d="m9 14.8 2 2 4.2-4.2" />
+    </svg>
+  );
+}
+
+export function CustomerHeartIcon({
+  className = 'w-8 h-8',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 20.5s-7.5-4.7-7.5-10.3A4.4 4.4 0 0 1 8.9 5.8c1.3 0 2.4.6 3.1 1.6.7-1 1.8-1.6 3.1-1.6a4.4 4.4 0 0 1 4.4 4.4c0 5.6-7.5 10.3-7.5 10.3Z" />
+    </svg>
+  );
+}
+
+export function TrustpilotWordmark({
+  className = 'h-7 w-auto',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 124 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-label="Trustpilot"
+      {...props}
+    >
+      <path
+        d="M14.5 2 17.8 11.4H27.7L19.7 17.2L22.7 26.6L14.5 20.9L6.3 26.6L9.3 17.2L1.3 11.4H11.2L14.5 2Z"
+        fill="#00B67A"
+      />
+      <path d="M20.2 19.3L19.7 17.2L14.5 20.9L20.2 19.3Z" fill="#005128" />
+      <text
+        x="32"
+        y="22.5"
+        fill="#191919"
+        fontFamily="Inter, system-ui, sans-serif"
+        fontSize="18.5"
+        fontWeight="700"
+        letterSpacing="-0.02em"
+      >
+        Trustpilot
+      </text>
+    </svg>
+  );
+}
+
+export function TrustpilotStars({
+  className = 'h-6 w-auto',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  const boxes = [0, 34, 68, 102, 136];
+
+  return (
+    <svg
+      viewBox="0 0 166 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      role="img"
+      aria-label="5 out of 5 stars on Trustpilot"
+      {...props}
+    >
+      {boxes.map((x) => (
+        <g key={x} transform={`translate(${x}, 0)`}>
+          <rect width="30" height="30" rx="1.5" fill="#00B67A" />
+          <path
+            d="M15 5.4L17.4 12.2H24.6L18.8 16.4L21 23.2L15 19.1L9 23.2L11.2 16.4L5.4 12.2H12.6L15 5.4Z"
+            fill="#FFFFFF"
+          />
+          <path d="M19.1 17.9L18.8 16.4L15 19.1L19.1 17.9Z" fill="#00B67A" opacity="0.2" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export function ChevronLeftIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m14.5 6-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function ChevronRightIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="m9.5 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+export function PlusIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.9}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+export function LocationPinIcon({
+  className = 'w-5 h-5',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M12 21s6.5-5.8 6.5-11.2A6.5 6.5 0 0 0 5.5 9.8C5.5 15.2 12 21 12 21Z" />
+      <circle cx="12" cy="9.8" r="2.3" />
+    </svg>
+  );
+}
+
+export function GooglePlusIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M8.7 11v2.2h3.6c-.2 1.4-1.5 2.9-3.6 2.9a3.9 3.9 0 0 1 0-7.8c1.1 0 1.9.4 2.5 1l1.7-1.6A6.2 6.2 0 0 0 8.7 6a6.1 6.1 0 1 0 0 12.2c3.5 0 5.9-2.5 5.9-6 0-.4 0-.8-.1-1.2H8.7Zm10.8 0V8.8h-1.7V11h-2.2v1.7h2.2v2.2h1.7v-2.2h2.2V11h-2.2Z" />
+    </svg>
+  );
+}
+
+export function InstagramIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+      <circle cx="12" cy="12" r="3.8" />
+      <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function FacebookIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.7}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M14.5 4.5h2.2V2h-2.5c-2.6 0-4.2 1.6-4.2 4.3V9H7.5v3h2.5v9.5h3.2V12h2.8l.5-3h-3.3V6.5c0-1.2.5-2 1.3-2Z" />
+    </svg>
+  );
+}
+
+export function CopyrightIcon({
+  className = 'w-4 h-4',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M14.5 9.6a3.5 3.5 0 1 0 0 4.8" />
+    </svg>
+  );
+}
+
+export function CheckCircleIcon({
+  className = 'w-6 h-6',
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      {...props}
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8.8 12.2 2.2 2.2 4.3-4.4" />
+    </svg>
+  );
+}
+

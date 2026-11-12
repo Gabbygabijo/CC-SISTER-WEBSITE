@@ -13,11 +13,6 @@ interface ServiceAreasMapProps {
   onResetView: () => void;
 }
 
-const VOYAGER_TILES =
-  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-const VOYAGER_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noreferrer">CARTO</a>';
-
 const OSM_TILES = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors';
@@ -82,24 +77,10 @@ export function ServiceAreasMap({
 
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    const primaryLayer = L.tileLayer(VOYAGER_TILES, {
-      attribution: VOYAGER_ATTRIBUTION,
-      subdomains: 'abcd',
+    L.tileLayer(OSM_TILES, {
+      attribution: OSM_ATTRIBUTION,
       maxZoom: 19,
-    });
-
-    let switchedToFallback = false;
-    primaryLayer.on('tileerror', () => {
-      if (switchedToFallback) return;
-      switchedToFallback = true;
-      map.removeLayer(primaryLayer);
-      L.tileLayer(OSM_TILES, {
-        attribution: OSM_ATTRIBUTION,
-        maxZoom: 19,
-      }).addTo(map);
-    });
-
-    primaryLayer.addTo(map);
+    }).addTo(map);
 
     const bounds = L.latLngBounds(areas.map((area) => [area.lat, area.lng]));
     boundsRef.current = bounds;

@@ -166,7 +166,7 @@ export function AreasWeCoverSection() {
               <img
                 src={MapImage}
                 alt="Static preview of South West and West London cleaning service areas"
-                className="aspect-[2378/1720] h-90 w-full rounded-card-lg border border-brand/25 object-cover shadow-xs sm:h-105 lg:h-112.5 xl:h-116"
+                className="aspect-2378/1720 h-90 w-full rounded-card-lg border border-brand/25 object-cover shadow-xs sm:h-105 lg:h-112.5 xl:h-116"
               />
             ) : (
               <Suspense

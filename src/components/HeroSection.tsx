@@ -32,10 +32,10 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[86%_top] will-change-transform sm:object-[80%_top] lg:object-top-right"
       />
 
-      {/* Soft left-side light gradient so typography remains crisp across breakpoints */}
+      {/* Soft left-side light gradient so typography remains crisp while preserving person's natural skin tone */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/98 via-white/92 via-58% to-white/10 sm:via-white/65 sm:via-45% sm:to-transparent lg:from-white/95 lg:via-white/55 lg:via-40% lg:to-transparent"
+        className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-[62%] bg-linear-to-r from-white/98 via-white/80 via-50% to-transparent sm:max-w-150 sm:via-55% lg:max-w-200 lg:via-60%"
       />
 
       <Container className="relative z-10 pb-22 pt-8 sm:pb-28 sm:pt-14 lg:min-h-186.75 lg:pb-38.75 lg:pt-18.25">

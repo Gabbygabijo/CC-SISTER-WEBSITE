@@ -198,7 +198,7 @@ export function ServiceAreasMap({
     : 'https://www.google.com/maps/search/?api=1&query=51.4718,-0.2414';
 
   return (
-    <div className="relative isolate h-80 w-full overflow-hidden rounded-card-lg border border-brand/25 bg-surface shadow-xs sm:h-95 lg:h-99.25">
+    <div className="relative isolate h-90 w-full overflow-hidden rounded-card-lg border border-brand/25 bg-surface shadow-xs sm:h-105 lg:h-112.5 xl:h-116">
       <div
         ref={containerRef}
         aria-label="Interactive coverage map of South West and West London cleaning areas"

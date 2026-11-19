@@ -29,16 +29,16 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, ease: EASE_OUT }}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[86%_top] will-change-transform sm:object-[74%_85%] lg:object-right-bottom"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[86%_top] will-change-transform sm:object-[80%_top] lg:object-top-right"
       />
 
-      {/* Soft left-side light gradient so typography remains crisp across breakpoints */}
+      {/* Soft left-side light gradient so typography remains crisp while preserving person's natural skin tone */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/98 via-white/92 via-58% to-white/10 sm:via-white/65 sm:via-45% sm:to-transparent lg:from-white/95 lg:via-white/55 lg:via-40% lg:to-transparent"
+        className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-[62%] bg-linear-to-r from-white/98 via-white/80 via-50% to-transparent sm:max-w-150 sm:via-55% lg:max-w-200 lg:via-60%"
       />
 
-      <Container className="relative z-10 pb-22 pt-8 sm:pb-28 sm:pt-14 lg:min-h-156.75 lg:pb-38.75 lg:pt-18.25">
+      <Container className="relative z-10 pb-22 pt-8 sm:pb-28 sm:pt-14 lg:min-h-186.75 lg:pb-38.75 lg:pt-18.25">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.24, ease: EASE_OUT }}
-            className="mt-3 max-w-54 min-[410px]:max-w-60 text-[13px] font-normal leading-[1.45] text-ink-body sm:mt-6 sm:max-w-112 sm:text-[18px] lg:mt-6.5 lg:max-w-126.75 lg:text-[20px]"
+            className="mt-3 max-w-54 min-[410px]:max-w-60 text-[13px] font-normal leading-[1.45] text-ink-body sm:mt-6 sm:max-w-md sm:text-[18px] lg:mt-6.5 lg:max-w-126.75 lg:text-[20px]"
           >
             Enjoy a beautifully maintained home with reliable, professional
             cleaning services designed around your lifestyle and schedule.

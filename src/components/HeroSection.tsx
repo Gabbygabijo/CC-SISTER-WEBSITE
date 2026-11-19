@@ -62,7 +62,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.24, ease: EASE_OUT }}
-            className="mt-3 max-w-54 min-[410px]:max-w-60 text-[13px] font-normal leading-[1.45] text-ink-body sm:mt-6 sm:max-w-112 sm:text-[18px] lg:mt-6.5 lg:max-w-126.75 lg:text-[20px]"
+            className="mt-3 max-w-54 min-[410px]:max-w-60 text-[13px] font-normal leading-[1.45] text-ink-body sm:mt-6 sm:max-w-md sm:text-[18px] lg:mt-6.5 lg:max-w-126.75 lg:text-[20px]"
           >
             Enjoy a beautifully maintained home with reliable, professional
             cleaning services designed around your lifestyle and schedule.

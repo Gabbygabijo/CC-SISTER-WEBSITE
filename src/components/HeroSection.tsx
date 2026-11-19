@@ -29,7 +29,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, ease: EASE_OUT }}
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[86%_top] will-change-transform sm:object-[74%_85%] lg:object-right-bottom"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[86%_top] will-change-transform sm:object-[80%_top] lg:object-top-right"
       />
 
       {/* Soft left-side light gradient so typography remains crisp across breakpoints */}
@@ -38,7 +38,7 @@ export function HeroSection() {
         className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/98 via-white/92 via-58% to-white/10 sm:via-white/65 sm:via-45% sm:to-transparent lg:from-white/95 lg:via-white/55 lg:via-40% lg:to-transparent"
       />
 
-      <Container className="relative z-10 pb-22 pt-8 sm:pb-28 sm:pt-14 lg:min-h-156.75 lg:pb-38.75 lg:pt-18.25">
+      <Container className="relative z-10 pb-22 pt-8 sm:pb-28 sm:pt-14 lg:min-h-186.75 lg:pb-38.75 lg:pt-18.25">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

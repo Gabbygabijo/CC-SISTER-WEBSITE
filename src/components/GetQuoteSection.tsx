@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useRef, useState } from 'react';
+import { submitQuote, validateQuoteFields } from '../lib/quoteSubmission';
 import { EASE_OUT, VIEWPORT_ONCE } from '../lib/motion';
 import { ActionButton } from './Button';
 import { Container } from './Container';
@@ -41,21 +42,37 @@ export function GetQuoteSection() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [pending, setPending] = useState(false);
+  const pendingRef = useRef(false);
+  const attempt = useRef<{ fingerprint: string; id: string } | null>(null);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!form.fullName.trim() || !form.email.trim() || !form.service.trim()) {
-      setErrorMessage(
-        'Please enter your name, email address, and select a cleaning service.',
-      );
-      return;
+    if (pendingRef.current) return;
+    const validation = validateQuoteFields(form);
+    if (validation) { setErrorMessage(validation); return; }
+    const fingerprint = JSON.stringify(form);
+    if (!attempt.current || attempt.current.fingerprint !== fingerprint) {
+      attempt.current = { fingerprint, id: crypto.randomUUID() };
     }
-
+    pendingRef.current = true;
+    setPending(true);
     setErrorMessage('');
-    setSubmitted(true);
+    try {
+      await submitQuote(form, attempt.current.id);
+      setSubmitted(true);
+    } catch (error) {
+      setErrorMessage(error instanceof Error && error.name !== 'TimeoutError' ? error.message : 'We could not confirm receipt. Please try again; your details are preserved.');
+    } finally { pendingRef.current = false; setPending(false); }
+  };
+
+  const updateField = (field: keyof QuoteFormState, value: string) => {
+    attempt.current = null;
+    setForm((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleReset = () => {
+    attempt.current = null;
     setForm(INITIAL_FORM);
     setSubmitted(false);
     setErrorMessage('');
@@ -109,14 +126,12 @@ export function GetQuoteSection() {
                     <CheckCircleIcon className="h-8 w-8" />
                   </div>
                   <h3 className="type-card-title mt-5 text-[22px] sm:text-[24px]">
-                    Quote Request Received
+                    Quote Request Accepted
                   </h3>
                   <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-body sm:text-[16px]">
                     Thank you, <span className="font-medium text-ink">{form.fullName}</span>.
-                    We have noted your request for{' '}
-                    <span className="font-medium text-ink">{form.service}</span> and will
-                    reply to <span className="font-medium text-ink">{form.email}</span>{' '}
-                    shortly.
+                    Your request for{' '}
+                    <span className="font-medium text-ink">{form.service}</span> has been accepted for processing. Our team will use <span className="font-medium text-ink">{form.email}</span> to reply.
                   </p>
                   <ActionButton
                     variant="outline"
@@ -135,6 +150,7 @@ export function GetQuoteSection() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   onSubmit={handleSubmit}
+                  aria-busy={pending}
                   noValidate
                 >
                   <div className="flex flex-col gap-5.5 sm:gap-7.25">
@@ -147,13 +163,14 @@ export function GetQuoteSection() {
                         Full Name
                       </label>
                       <input
+                        disabled={pending}
                         id="quote-full-name"
                         name="fullName"
                         type="text"
                         required
                         value={form.fullName}
                         onChange={(e) =>
-                          setForm((prev) => ({ ...prev, fullName: e.target.value }))
+                          updateField('fullName', e.target.value)
                         }
                         placeholder="Enter your name"
                         className="h-11.5 w-full rounded-card-sm border border-line bg-surface px-3.75 text-[14px] text-ink placeholder:text-ink-subtle transition-colors focus:border-brand focus:outline-none"
@@ -170,13 +187,14 @@ export function GetQuoteSection() {
                           Email Address
                         </label>
                         <input
+                        disabled={pending}
                           id="quote-email"
                           name="email"
                           type="email"
                           required
                           value={form.email}
                           onChange={(e) =>
-                            setForm((prev) => ({ ...prev, email: e.target.value }))
+                            updateField('email', e.target.value)
                           }
                           placeholder="Enter your email"
                           className="h-11.5 w-full rounded-card-sm border border-line bg-surface px-3.75 text-[14px] text-ink placeholder:text-ink-subtle transition-colors focus:border-brand focus:outline-none"
@@ -191,12 +209,13 @@ export function GetQuoteSection() {
                           Phone Number
                         </label>
                         <input
+                        disabled={pending}
                           id="quote-phone"
                           name="phone"
                           type="tel"
                           value={form.phone}
                           onChange={(e) =>
-                            setForm((prev) => ({ ...prev, phone: e.target.value }))
+                            updateField('phone', e.target.value)
                           }
                           placeholder="Enter your phone number"
                           className="h-11.5 w-full rounded-card-sm border border-line bg-surface px-3.75 text-[14px] text-ink placeholder:text-ink-subtle transition-colors focus:border-brand focus:outline-none"
@@ -214,12 +233,13 @@ export function GetQuoteSection() {
                       </label>
                       <div className="relative">
                         <select
+                          disabled={pending}
                           id="quote-service"
                           name="service"
                           required
                           value={form.service}
                           onChange={(e) =>
-                            setForm((prev) => ({ ...prev, service: e.target.value }))
+                            updateField('service', e.target.value)
                           }
                           className={`h-11.5 w-full appearance-none rounded-card-sm border border-line bg-surface pr-10 pl-4 text-[14px] transition-colors focus:border-brand focus:outline-none ${
                             form.service ? 'text-ink' : 'text-ink-subtle'
@@ -247,12 +267,13 @@ export function GetQuoteSection() {
                         Additional information (optional)
                       </label>
                       <textarea
+                        disabled={pending}
                         id="quote-notes"
                         name="notes"
                         rows={4}
                         value={form.notes}
                         onChange={(e) =>
-                          setForm((prev) => ({ ...prev, notes: e.target.value }))
+                          updateField('notes', e.target.value)
                         }
                         placeholder="Number of bedrooms and bathrooms, preferred days, anything we should know"
                         className="min-h-26.5 w-full resize-y rounded-card-sm border border-line bg-surface px-4 py-3 text-[14px] leading-relaxed text-ink placeholder:text-ink-subtle transition-colors focus:border-brand focus:outline-none"
@@ -271,11 +292,12 @@ export function GetQuoteSection() {
 
                   <ActionButton
                     type="submit"
+                    disabled={pending}
                     variant="primary"
                     size="full"
                     className="mt-7 sm:mt-8.5"
                   >
-                    Request a free Quote
+                    {pending ? 'Sending enquiry…' : 'Request a free Quote'}
                   </ActionButton>
 
                   <p className="mt-3.5 text-center text-[13px] leading-snug text-ink-subtle sm:mt-4 sm:text-[14px]">

@@ -1,0 +1,150 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Private sister website with CloudFront preview and existing PureOps API origin.
+Parameters:
+  Environment:
+    Type: String
+    Default: prod
+    AllowedValues: [prod]
+  ApiGatewayHost:
+    Type: String
+    AllowedPattern: '^[a-z0-9]+\.execute-api\.us-east-1\.amazonaws\.com$'
+  ApiStage:
+    Type: String
+    Default: prod
+    AllowedValues: [prod]
+Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketName: !Sub 'cc-sister-website-${AWS::AccountId}-${Environment}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+  OriginAccess:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub 'cc-sister-${Environment}-s3'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+  ApiRewrite:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: !Sub 'cc-sister-${Environment}-api-rewrite'
+      AutoPublish: true
+      FunctionConfig:
+        Comment: Strip browser api prefix before the production API origin path is added.
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          request.uri = request.uri.replace(/^\/api\//, '/');
+          return request;
+        }
+  ApiOriginPolicy:
+    Type: AWS::CloudFront::OriginRequestPolicy
+    Properties:
+      OriginRequestPolicyConfig:
+        Name: !Sub 'cc-sister-${Environment}-api'
+        CookiesConfig:
+          CookieBehavior: none
+        HeadersConfig:
+          HeaderBehavior: whitelist
+          Headers: [Origin, Content-Type]
+        QueryStringsConfig:
+          QueryStringBehavior: all
+  StaticCachePolicy:
+    Type: AWS::CloudFront::CachePolicy
+    Properties:
+      CachePolicyConfig:
+        Name: !Sub 'cc-sister-${Environment}-static'
+        DefaultTTL: 60
+        MinTTL: 0
+        MaxTTL: 31536000
+        ParametersInCacheKeyAndForwardedToOrigin:
+          EnableAcceptEncodingGzip: true
+          EnableAcceptEncodingBrotli: true
+          CookiesConfig:
+            CookieBehavior: none
+          HeadersConfig:
+            HeaderBehavior: none
+          QueryStringsConfig:
+            QueryStringBehavior: none
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: Cleaning Circle sister website preview
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        IPV6Enabled: true
+        PriceClass: PriceClass_100
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        Origins:
+          - Id: Website
+            DomainName: !GetAtt WebsiteBucket.RegionalDomainName
+            OriginAccessControlId: !Ref OriginAccess
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+          - Id: PureOpsApi
+            DomainName: !Ref ApiGatewayHost
+            OriginPath: !Sub '/${ApiStage}'
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols: [TLSv1.2]
+              OriginReadTimeout: 30
+        DefaultCacheBehavior:
+          TargetOriginId: Website
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD, OPTIONS]
+          CachedMethods: [GET, HEAD]
+          Compress: true
+          CachePolicyId: !Ref StaticCachePolicy
+        CacheBehaviors:
+          - PathPattern: /api/*
+            TargetOriginId: PureOpsApi
+            ViewerProtocolPolicy: https-only
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+            CachedMethods: [GET, HEAD]
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: !Ref ApiOriginPolicy
+            FunctionAssociations:
+              - EventType: viewer-request
+                FunctionARN: !GetAtt ApiRewrite.FunctionARN
+  BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub '${WebsiteBucket.Arn}/*'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub 'arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}'
+Outputs:
+  WebsiteBucket:
+    Value: !Ref WebsiteBucket
+  DistributionId:
+    Value: !Ref Distribution
+  PreviewUrl:
+    Value: !Sub 'https://${Distribution.DomainName}'
+  RecaptchaHostname:
+    Value: !GetAtt Distribution.DomainName

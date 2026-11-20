@@ -28,21 +28,21 @@ export function Navbar() {
         {/* Top contact utility strip */}
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 pt-2 pb-1 text-[9.5px] text-ink min-[400px]:gap-x-3 min-[400px]:text-[10.5px] sm:justify-end sm:gap-x-6 sm:py-2 sm:text-[13px] lg:h-9 lg:gap-x-7 lg:py-0 lg:text-[16px]">
           <a
-            href="https://wa.me/442080593982"
+            href="https://wa.me/447565435165"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1 whitespace-nowrap transition-opacity hover:opacity-75 sm:gap-1.5"
           >
             <WhatsAppIcon className="h-3 w-3 shrink-0 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
-            <span>020 8059 3982</span>
+            <span>075 6543 5165</span>
           </a>
 
           <a
-            href="tel:02080593982"
+            href="tel:02081447173"
             className="inline-flex items-center gap-1 whitespace-nowrap transition-opacity hover:opacity-75 sm:gap-1.5"
           >
             <PhoneIcon className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5 lg:h-4 lg:w-4" />
-            <span>020 8059 3982</span>
+            <span>020 8144 7173</span>
           </a>
 
           <a

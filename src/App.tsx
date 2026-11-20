@@ -7,6 +7,7 @@ import { HeroSection } from './components/HeroSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { Navbar } from './components/Navbar';
 import { ResidentialServicesSection } from './components/ResidentialServicesSection';
+import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
 
@@ -26,6 +27,7 @@ export function App() {
           <AreasWeCoverSection />
         </main>
         <Footer />
+        <ScrollToTopButton />
       </div>
     </MotionConfig>
   );

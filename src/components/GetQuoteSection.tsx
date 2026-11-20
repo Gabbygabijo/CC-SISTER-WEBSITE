@@ -307,8 +307,7 @@ export function GetQuoteSection() {
                     Our Address
                   </h3>
                   <p className="mt-0.5 max-w-88.5 text-[15px] leading-normal text-ink-strong sm:text-[16px]">
-                    Building 3, Chiswick Park, 566 Chiswick High Road, London,
-                    W4 5YA
+                    Cleaning Circle Suite 229 295 Chiswick High Road Chiswick, W4 4HH UK
                   </p>
                 </div>
               </div>
@@ -321,10 +320,10 @@ export function GetQuoteSection() {
                     Telephone
                   </h3>
                   <a
-                    href="tel:02080593982"
+                    href="tel:02081447173"
                     className="mt-0.5 inline-block text-[15px] leading-normal text-ink-strong transition-colors hover:text-brand sm:text-[16px]"
                   >
-                    020 8059 3982
+                    020 8144 7173
                   </a>
                 </div>
               </div>

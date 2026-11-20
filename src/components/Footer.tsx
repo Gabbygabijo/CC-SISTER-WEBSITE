@@ -135,10 +135,10 @@ export function Footer() {
                   </a>
                   ,{' '}
                   <a
-                    href="tel:02080593982"
+                    href="tel:02081447173"
                     className="transition-colors hover:text-brand"
                   >
-                    020 8059 3982
+                    020 8144 7173
                   </a>
                 </span>
               </li>

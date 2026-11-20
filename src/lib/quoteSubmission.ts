@@ -32,11 +32,10 @@ export async function submitQuote(form: QuoteFields, submissionId: string): Prom
     const timer = window.setTimeout(() => reject(new Error('Verification timed out. Please try again.')), 10000);
     captcha.ready(() => { captcha.execute(key, { action: 'sister_quote' }).then(resolve, reject).finally(() => window.clearTimeout(timer)); });
   });
-  const response = await fetch('/api/forms/sister/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, submissionId, recaptchaToken: token }), signal: AbortSignal.timeout(20000) });
+  const response = await fetch('/api/forms/sister/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...form, submissionId, recaptchaToken: token }), signal: AbortSignal.timeout(28000) });
   const body = await response.json().catch(() => null);
-  if (response.status !== 202 || body?.submissionId !== submissionId || body?.status !== 'accepted') {
+  if (response.status !== 200 || body?.submissionId !== submissionId || body?.status !== 'received') {
     if (response.status === 400) throw new Error('Please check your details and try again.');
-    if (response.status === 409) throw new Error('This enquiry reference was already used. Edit your details before trying again.');
     throw new Error('We could not confirm receipt. Your details are still here; please try again.');
   }
 }

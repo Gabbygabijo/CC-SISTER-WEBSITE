@@ -1,20 +1,23 @@
 # Sister website CloudFront preview
 
-The application now submits its existing quote form through `/api/forms/sister/quote`. Hosting is defined in `infrastructure/hosting.yml`: private versioned S3 with OAC, CloudFront's generated HTTPS hostname, and uncached `/api/*` requests to the existing production PureOps API. There is no domain assignment or new Lambda.
+Updated 2026-11-20. The existing quote form posts to `/api/forms/sister/quote`; the existing PureOps API handles validation, reCAPTCHA, best-effort ProviderEventLog ingestion and SendGrid notifications. The dedicated sister queue/worker/SNS design is superseded. There is no new Lambda or custom domain.
 
-Coordinated API migration, settings, release order, notifications, acceptance, alarms, retries and rollback are documented in `/home/ola-bassey/code/cc_pureops/cc-api/docs/sister-website-quotes-release.md`. All remote publication and AWS state changes are paused until Tunde restores manual approval. Commits remain user-run.
+The private S3/OAC hosting and uncached API routing remain in `infrastructure/hosting.yml`. Existing recorded hosting: stack `cc-sister-website-prod`, bucket `cc-sister-website-406463815756-prod`, distribution `EMF8H5Q3AU5WM`, https://d3qkhhvamfnq1h.cloudfront.net. These identifiers are historical release evidence; refresh actual state before operations. The working hosted quote flow is not yet verified.
 
-Build with Node 20.19+ (Node 24 tested) and the public `VITE_RECAPTCHA_SITE_KEY` allowed for the exact generated CloudFront hostname:
+Production changes and publication remain paused. The canonical API contract, main-site notification success rules, configuration, limitations and release/rollback sequence are in `/home/ola-bassey/code/cc_pureops/cc-api/docs/sister-website-quotes-release.md`. Tunde handles reCAPTCHA allowlisting; reuse the main site's public key/server configuration. No SNS mailbox confirmation is needed.
+
+Success requires HTTP 200 with the matching submission ID and `status: received`. This confirms form handling, not database persistence or inbox delivery. The frontend retains inputs on errors and unchanged retry identity, prevents concurrent submission and resets identity after edits or Send Another Enquiry. A retry uses a fresh token. The server deduplicates PureOps rows through existing ingestion but can resend emails; no delivery journal or background retry exists.
+
+After deployment resumes, build with installed Node 20.19+ (Node 24 tested), the public `VITE_RECAPTCHA_SITE_KEY`, and the required process-tree memory limit:
 
 ```bash
-npm ci
 VITE_RECAPTCHA_SITE_KEY=<public-key> node scripts/build-preview.mjs
 ```
 
-The server verification secret belongs only in the PureOps backend. Never create a `VITE_*` secret. The build script writes the public key and Git revision to `dist/deployment.json`; the deployment script checks those against its supplied key and HEAD before any upload. Rebuild after the user-run commit. The ordinary validation build without a live key is not the working release artifact.
+The server verification secret belongs only in PureOps. Never create a VITE secret. The build script records the public key and Git revision in `dist/deployment.json`; the deploy script checks both before uploading. Rebuild the release artifact from the final committed source. A validation build without the live public key is not a working release artifact.
 
-After the production/manual-approval checkpoint, set `PUREOPS_API_HOST` to the freshly verified production API Gateway hostname and run `scripts/deploy-preview.sh` with the public site key in the environment. Create the hosting stack first when its generated hostname is needed for Google's allowlist; read the outputs, configure reCAPTCHA, then build/publish. No custom domain, DNS or custom certificate is required.
+`scripts/deploy-preview.sh` changes AWS state: it must not run during the deployment pause. On resume, freshly verify the API origin and inspect the existing hosting stack before use. Keep `/api` stripping and `/prod` addition exactly once, API caching disabled, bucket private, and API errors separate from frontend error handling. Retain old hashed assets, publish index with no-cache and invalidate only intended paths.
 
-`node --test scripts/test-quote-submission.cjs` verifies validation and truthful acceptance/failure behaviour. `npm run lint` and `npm run build` need a supported Node executable on PATH for child processes. Five client tests, changed-file lint and the production build/type check passed locally. The live map remains lazy-loaded.
+Local client checks: `node --test scripts/test-quote-submission.cjs`; production validation: `npm run build` under the repository memory limits, using Node 24 on child-process PATH. No installation is needed for the existing checkout. Changed-file lint covers the form component and client.
 
-Manual hosted acceptance is pending and recorded in `HUMAN_verification.md`. Test unchanged retries, edited submissions, submit locking, field preservation on errors and one correctly labelled PureOps communication before calling the preview operational. Separate SQS acceptance, database persistence, provider acceptance and actual mailbox receipt.
+Manual hosted acceptance remains in `HUMAN_verification.md`. Check pending locks, failure retention, edits/new enquiry, one correctly labelled PureOps communication with service/notes and unchanged retry row deduplication. Record SendGrid acceptance and actual inbox receipt separately. Exercise outages with mocks or isolated test services, never by disrupting production.

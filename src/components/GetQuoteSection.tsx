@@ -131,7 +131,7 @@ export function GetQuoteSection() {
                   <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-body sm:text-[16px]">
                     Thank you, <span className="font-medium text-ink">{form.fullName}</span>.
                     Your request for{' '}
-                    <span className="font-medium text-ink">{form.service}</span> has been accepted for processing. Our team will use <span className="font-medium text-ink">{form.email}</span> to reply.
+                    <span className="font-medium text-ink">{form.service}</span> has been received. Our team will use <span className="font-medium text-ink">{form.email}</span> to reply.
                   </p>
                   <ActionButton
                     variant="outline"
